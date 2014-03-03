@@ -31,25 +31,24 @@ register prepare_serializer_for_format => sub {
 
     hook 'before' => sub {
 
-        my $format = params->{'format'};
-        return unless defined $format;
+        my $format = params->{'format'}
+            or return;
 
         # remember what was there before
         $default_serializer = setting 'serializer';
 
-        my $serializer = $serializers->{$format};
-        unless (defined $serializer) {
-            return halt(
+        my $serializer = $serializers->{$format}
+            or return halt(
                 Dancer::Error->new(
                     code    => 404,
+                    title   => "unsupported format requested",
                     message => "unsupported format requested: " . $format
-                )
+                )->render
             );
-        }
 
         set serializer => $serializer;
-        my $ct = $content_types->{$format} || setting('content_type');
-        content_type $ct;
+
+        content_type $content_types->{$format} || setting('content_type');
     };
 
     hook after => sub {
