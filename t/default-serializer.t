@@ -1,8 +1,6 @@
 use strict;
 use warnings;
 
-use Test::More tests => 1;
-
 {
     use Dancer ':tests';
     use Dancer::Plugin::REST;
@@ -20,6 +18,7 @@ use Test::More tests => 1;
 
 }
 
+use Test::More tests => 3;
 use Dancer::Test;
 
 response_content_like '/foo' => qr/<data/, "default serializer is XML";
@@ -27,7 +26,3 @@ response_content_like '/foo' => qr/<data/, "default serializer is XML";
 response_content_like '/foo.json' => qr/"hello"\s*:\s*"world"/, "ask for JSON";
 
 response_content_like '/foo' => qr/<data/, "default serializer is still XML";
-
-
-
-
