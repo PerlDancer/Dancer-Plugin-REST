@@ -15,6 +15,8 @@ my $content_types = {
     xml  => 'application/xml',
 };
 
+our $default_serializer;
+
 register prepare_serializer_for_format => sub {
     my $conf        = plugin_setting;
     my $serializers = (
@@ -28,23 +30,31 @@ register prepare_serializer_for_format => sub {
     );
 
     hook 'before' => sub {
-        my $format = params->{'format'};
-        return unless defined $format;
 
-        my $serializer = $serializers->{$format};
-        unless (defined $serializer) {
-            return halt(
+        my $format = params->{'format'}
+            or return;
+
+        # remember what was there before
+        $default_serializer = setting 'serializer';
+
+        my $serializer = $serializers->{$format}
+            or return halt(
                 Dancer::Error->new(
                     code    => 404,
+                    title   => "unsupported format requested",
                     message => "unsupported format requested: " . $format
-                )
+                )->render
             );
-        }
 
         set serializer => $serializer;
-        my $ct = $content_types->{$format} || setting('content_type');
-        content_type $ct;
+
+        content_type $content_types->{$format} || setting('content_type');
     };
+
+    hook after => sub {
+        # put it back the way it was
+        set serializer => $default_serializer if $default_serializer;
+    }
 };
 
 register resource => sub {

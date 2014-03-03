@@ -1,3 +1,9 @@
+$NEXT
+
+    [BUG FIXES]
+    * 'prepare_serializer_for_format' was clobbering the
+        default serializer. (RT#93478, reported by Pierre Vigier)
+
 0.07    2011-11-01
 
     * Minor updates to fix warnings with Dancer 1.3080

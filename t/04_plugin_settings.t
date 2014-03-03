@@ -18,6 +18,8 @@ my $yaml = YAML::Dump($data);
     use Dancer::Plugin::REST;
 
     set environment => 'test';
+    set show_errors => 1;
+
     prepare_serializer_for_format;
 
     get '/' => sub { "root" };
@@ -41,17 +43,13 @@ my @tests = (
         request => [GET => '/foo.yml'],
         response => $yaml,
     },
-    { 
-        request => [GET => '/foo.foobar'],
-        response => qr/unsupported format requested: foobar/ms,
-    },
     {
         request => [GET => '/'],
         response => 'root',
     },
 );
 
-plan tests => scalar(@tests);
+plan tests => 6;
 
 for my $test ( @tests ) {
     my $response = dancer_response(@{$test->{request}});
@@ -65,5 +63,7 @@ for my $test ( @tests ) {
     }
 }
 
+my $response = dancer_response( GET => '/foo.foobar' );
 
-
+is $response->status => 404, 'error code 404';
+like $response->content => qr/unsupported format requested: foobar/ms;
