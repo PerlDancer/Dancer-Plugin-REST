@@ -15,6 +15,8 @@ my $content_types = {
     xml  => 'application/xml',
 };
 
+our $default_serializer;
+
 register prepare_serializer_for_format => sub {
     my $conf        = plugin_setting;
     my $serializers = (
@@ -28,8 +30,12 @@ register prepare_serializer_for_format => sub {
     );
 
     hook 'before' => sub {
+
         my $format = params->{'format'};
         return unless defined $format;
+
+        # remember what was there before
+        $default_serializer = setting 'serializer';
 
         my $serializer = $serializers->{$format};
         unless (defined $serializer) {
@@ -45,6 +51,11 @@ register prepare_serializer_for_format => sub {
         my $ct = $content_types->{$format} || setting('content_type');
         content_type $ct;
     };
+
+    hook after => sub {
+        # put it back the way it was
+        set serializer => $default_serializer if $default_serializer;
+    }
 };
 
 register resource => sub {
