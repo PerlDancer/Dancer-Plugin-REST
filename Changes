@@ -1,0 +1,38 @@
+Revision history for {{$DIST}}
+
+{{$NEXT}}
+ [BUG FIXES]
+ - 'prepare_serializer_for_format' was clobbering the default serializer.
+   (RT#93478, reported by Pierre Vigier)
+
+0.07 2011-11-01
+ - Minor updates to fix warnings with Dancer 1.3080
+ - Fix POD (Alexis Sukrieh)
+
+0.06 2011-05-28
+ [TEST SUITE]
+ - Skip test t/03_resource.t if Dancer is not >= 1.3059_01 A bug in
+   Dancer::Test in previous versions prevent the test from passing.
+
+0.05 2011-03-04
+ [BUG FIXES]
+ - Fix the test suite with dancer_response
+ - Fix dependencies: Dancer 1.3014
+
+0.04 2010-12-22
+ - Add all HTTP response status (Alexis Sukrieh)
+
+0.03 2010-10-18
+ - New keywords for ReST response status  (status_ok, status_created, ...)
+   (Franck Cuny)
+
+0.02 2010-10-14
+ - 100% coverage
+ - fix a bug in 'resource' (order of route hander definition)
+
+0.0001_01 2010-05-06
+ - Support for prepare_serializer_for_format keyword autoamtically set a
+   serializer according to params->{format}
+ - Support for resource definition When a resource is defined a set of
+   routes are defined in a RESTful manner.
+
