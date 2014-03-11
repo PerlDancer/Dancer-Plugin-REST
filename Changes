@@ -1,11 +1,14 @@
-Revision history for {{$DIST}}
+Revision history for
 
-{{$NEXT}}
+0.08 2014-03-10
  [BUG FIXES]
  - 'prepare_serializer_for_format' was clobbering the default serializer.
    (RT#93478, reported by Pierre Vigier, fix by Yanick Champoux)
- - serializer not detected in time for first deserialization. 
-    (RT#78437, reported by Andrew Solomon, fix by Yanick Champoux)
+ - serializer not detected in time for first deserialization.  (RT#78437,
+   reported by Andrew Solomon, fix by Yanick Champoux)
+
+ [STATISTICS]
+ - code churn: 12 files changed, 172 insertions(+), 111 deletions(-)
 
 0.07 2011-11-01
  - Minor updates to fix warnings with Dancer 1.3080
