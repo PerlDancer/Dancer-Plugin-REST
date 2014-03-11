@@ -29,12 +29,10 @@ register prepare_serializer_for_format => sub {
     );
 
     hook 'before' => sub {
-
-        my $format = params->{'format'}
-            or return;
-
         # remember what was there before
-        $default_serializer = setting 'serializer';
+        $default_serializer ||= setting 'serializer';
+
+        my $format = params->{'format'} or return;
 
         my $serializer = $serializers->{$format}
             or return halt(
@@ -47,12 +45,17 @@ register prepare_serializer_for_format => sub {
 
         set serializer => $serializer;
 
+        # check if we were supposed to deserialize the request
+        Dancer::Serializer->process_request(
+            Dancer::SharedData->request
+        );
+
         content_type $content_types->{$format} || setting('content_type');
     };
 
     hook after => sub {
         # put it back the way it was
-        set serializer => $default_serializer if $default_serializer;
+        set serializer => $default_serializer;
     }
 };
 
