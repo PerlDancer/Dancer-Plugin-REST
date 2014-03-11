@@ -1,13 +1,12 @@
 package Dancer::Plugin::REST;
+# ABSTRACT: A plugin for writing RESTful apps with Dancer
+
 use strict;
 use warnings;
 
 use Carp 'croak';
 use Dancer ':syntax';
 use Dancer::Plugin;
-
-our $AUTHORITY = 'SUKRIA';
-our $VERSION   = '0.07';
 
 my $content_types = {
     json => 'application/json',
@@ -176,10 +175,6 @@ register_plugin;
 __END__
 
 =pod
-
-=head1 NAME
-
-Dancer::Plugin::REST - A plugin for writing RESTful apps with Dancer
 
 =head1 SYNOPSYS
 
