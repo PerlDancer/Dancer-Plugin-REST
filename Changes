@@ -1,18 +1,11 @@
-Revision history for {{$DIST}}
+Revision history for
 
-{{$NEXT}}
- [API CHANGES]
-
+0.09 2014-03-11
  [BUG FIXES]
  - Skip test if XML::Simple is not installed.
 
- [DOCUMENTATION]
-
- [ENHANCEMENTS]
-
- [NEW FEATURES]
-
  [STATISTICS]
+ - code churn: 2 files changed, 26 insertions(+), 3 deletions(-)
 
 0.08 2014-03-10
  [BUG FIXES]
