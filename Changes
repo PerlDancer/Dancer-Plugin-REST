@@ -4,6 +4,7 @@ Revision history for {{$DIST}}
  [API CHANGES]
 
  [BUG FIXES]
+ - Skip test if XML::Simple is not installed.
 
  [DOCUMENTATION]
 

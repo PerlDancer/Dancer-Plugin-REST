@@ -1,6 +1,13 @@
 use strict;
 use warnings;
 
+use Test::More;
+
+plan skip_all => 'XML::Simple required'
+    unless eval "use XML::Simple; 1";
+
+plan tests => 3;
+
 {
     use Dancer ':tests';
     use Dancer::Plugin::REST;
@@ -18,7 +25,6 @@ use warnings;
 
 }
 
-use Test::More tests => 3;
 use Dancer::Test;
 
 response_content_like '/foo' => qr/<data/, "default serializer is XML";
