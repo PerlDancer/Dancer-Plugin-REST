@@ -59,36 +59,38 @@ register prepare_serializer_for_format => sub {
     }
 };
 
+my %triggers_map = (
+    get    => \&get,
+    update => \&put,
+    create => \&post,
+    delete => \&del,
+);
+
 register resource => sub {
+    croak "resource invoked without arguments" unless @_;
+
     my ($resource, %triggers) = @_;
 
-    croak "resource should be given with triggers"
-      unless defined $resource
-          and defined $triggers{get}
-          and defined $triggers{update}
-          and defined $triggers{delete}
-          and defined $triggers{create};
+    while( my( $t, $sub ) = each %triggers ) {
+        my $method = $triggers_map{$t}
+            or croak "action '$t' not recognized";
 
-    get "/${resource}/:id.:format" => $triggers{get};
-    get "/${resource}/:id"         => $triggers{get};
+        if ( $t eq 'create' ) {
+            $method->( "/${resource}" => $triggers{$t} );
+        }
+        else {
+            for my $ext ( '', '.:format' ) {
+                $method->( "/${resource}/:id$ext" => $triggers{$t} );
+            }
+        }
+    }
 
-    put "/${resource}/:id.:format" => $triggers{update};
-    put "/${resource}/:id"         => $triggers{update};
-
-    post "/${resource}.:format" => $triggers{create};
-    post "/${resource}"         => $triggers{create};
-
-    del "/${resource}/:id.:format" => $triggers{delete};
-    del "/${resource}/:id"         => $triggers{delete};
 };
 
 register send_entity => sub {
-    my ($entity, $http_code) = @_;
-
-    $http_code ||= 200;
-
-    status($http_code);
-    $entity;
+    # entity, status_code
+    status($_[1] || 200);
+    $_[0];
 };
 
 my %http_codes = (

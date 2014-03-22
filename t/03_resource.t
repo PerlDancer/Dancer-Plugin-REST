@@ -57,8 +57,12 @@ plan tests => 8;
         { user => $users->{$id} };
     }
 
-    eval { resource failure => get => sub { 'GET' } };
-    like $@, qr{resource should be given with triggers}, 
+    eval { 
+        resource failure => 
+            get => sub { 'GET' },
+            woobly => sub { },
+    };
+    like $@, qr{action 'woobly' not recognized}, 
         "resource must have 4 hooks";
 }
 

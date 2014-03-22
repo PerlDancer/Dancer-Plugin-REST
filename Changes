@@ -9,6 +9,7 @@ Revision history for {{$DIST}}
  [DOCUMENTATION]
 
  [ENHANCEMENTS]
+ - 'resource' can now be used with a subset of its actions.
 
  [NEW FEATURES]
 
