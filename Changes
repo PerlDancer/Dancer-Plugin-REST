@@ -4,6 +4,7 @@ Revision history for {{$DIST}}
  [API CHANGES]
 
  [BUG FIXES]
+ - Requires Dancer v1.3111 or better. (GH#2, reported by OverlordQ)
 
  [DOCUMENTATION]
 
