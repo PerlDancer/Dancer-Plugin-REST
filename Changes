@@ -1,19 +1,14 @@
-Revision history for {{$DIST}}
+Revision history for
 
-{{$NEXT}}
- [API CHANGES]
-
+0.10 2014-03-22
  [BUG FIXES]
  - Requires Dancer v1.3111 or better. (GH#2, reported by OverlordQ)
-
- [DOCUMENTATION]
 
  [ENHANCEMENTS]
  - 'resource' can now be used with a subset of its actions.
 
- [NEW FEATURES]
-
  [STATISTICS]
+ - code churn: 4 files changed, 42 insertions(+), 25 deletions(-)
 
 0.09 2014-03-11
  [BUG FIXES]

@@ -1,6 +1,9 @@
 package Dancer::Plugin::REST;
+BEGIN {
+  $Dancer::Plugin::REST::AUTHORITY = 'cpan:SUKRIA';
+}
 # ABSTRACT: A plugin for writing RESTful apps with Dancer
-
+$Dancer::Plugin::REST::VERSION = '0.10';
 use strict;
 use warnings;
 
@@ -177,9 +180,24 @@ for my $code (keys %http_codes) {
 
 register_plugin;
 1;
+
 __END__
 
 =pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+Dancer::Plugin::REST - A plugin for writing RESTful apps with Dancer
+
+=head1 VERSION
+
+version 0.10
+
+=head1 DESCRIPTION
+
+This plugin helps you write a RESTful webservice with Dancer.
 
 =head1 SYNOPSYS
 
@@ -202,10 +220,6 @@ __END__
     id: 42
     name: "John Foo"
     email: "john.foo@example.com"
-
-=head1 DESCRIPTION
-
-This plugin helps you write a RESTful webservice with Dancer.
 
 =head1 KEYWORDS
 
@@ -286,5 +300,26 @@ Cuny.
 =head1 SEE ALSO
 
 L<Dancer> L<http://en.wikipedia.org/wiki/Representational_State_Transfer>
+
+=head1 AUTHORS
+
+=over 4
+
+=item *
+
+Alexis Sukrieh <sukria@sukria.net>
+
+=item *
+
+Franck Cuny <franckc@cpan.org>
+
+=back
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2010 by Alexis Sukrieh.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
