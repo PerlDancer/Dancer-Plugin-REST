@@ -4,6 +4,8 @@ Revision history for {{$DIST}}
  [API CHANGES]
 
  [BUG FIXES]
+ - Routes with ':id.:format' were not created properly. 
+    (GH#3, reported by garu)
 
  [DOCUMENTATION]
 
