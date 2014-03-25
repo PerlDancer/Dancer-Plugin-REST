@@ -4,8 +4,6 @@ Revision history for {{$DIST}}
  [API CHANGES]
 
  [BUG FIXES]
- - Routes with ':id.:format' were not created properly. 
-    (GH#3, reported by garu)
 
  [DOCUMENTATION]
 
@@ -14,6 +12,14 @@ Revision history for {{$DIST}}
  [NEW FEATURES]
 
  [STATISTICS]
+
+0.11 2014-03-25
+ [BUG FIXES]
+ - Routes with ':id.:format' were not created properly.  (GH#3, reported by
+   garu)
+
+ [STATISTICS]
+ - code churn: 4 files changed, 68 insertions(+), 3 deletions(-)
 
 0.10 2014-03-22
  [BUG FIXES]
