@@ -77,9 +77,10 @@ register resource => sub {
 
         if ( $t eq 'create' ) {
             $method->( "/${resource}" => $triggers{$t} );
+            $method->( "/${resource}.:format" => $triggers{$t} );
         }
         else {
-            for my $ext ( '', '.:format' ) {
+            for my $ext ( '.:format', '' ) {
                 $method->( "/${resource}/:id$ext" => $triggers{$t} );
             }
         }

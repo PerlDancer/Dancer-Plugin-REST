@@ -10,6 +10,9 @@ $dancer_version =~ s/_//g;
 plan skip_all => "Dancer 1.3059_01 is needed for this test (you have $dancer_version)"
   if $dancer_version < 1.305901;
 
+plan skip_all => 'tests require JSON'
+    unless Dancer::ModuleLoader->load('JSON');
+
 {
     package Webservice;
     use Dancer;
@@ -17,6 +20,7 @@ plan skip_all => "Dancer 1.3059_01 is needed for this test (you have $dancer_ver
 
     setting environment => 'testing';
     prepare_serializer_for_format;
+
     resource user =>
         get    => sub { [ id   => params->{id},   format => params->{format} ] },
         delete => sub { [ id   => params->{id},   format => params->{format} ] },
